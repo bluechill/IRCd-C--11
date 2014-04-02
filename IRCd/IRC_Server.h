@@ -30,7 +30,10 @@ public:
 	void start();
 
 private:
-	void read_handler(std::shared_ptr<IRC_Client> client, std::string &message);
+	void set_client_handlers(std::shared_ptr<IRC_Client> client);
+
+	void client_read_handler(std::shared_ptr<IRC_Client> client, std::string &message);
+	void client_quit_handler(std::shared_ptr<IRC_Client> client);
 
 	void accept();
 	void accept_v4();

@@ -27,10 +27,11 @@ class IRC_Client
 	friend class IRC_Server;
 
 public:
-	IRC_Client(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd, std::function<void (std::string&)> read_handler);
+	IRC_Client(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd);
 	~IRC_Client();
 
 	void write(const std::string& text);
+	void disconnect();
 
 private:
 	void start();
@@ -38,11 +39,15 @@ private:
 	void set_read_handler(std::function<void (std::string&)> read_handler) { m_read_handler = read_handler; }
 	std::function<void (std::string&)> get_read_handler() { return m_read_handler; }
 
+	void set_quit_handler(std::function<void ()> quit_handler) { m_quit_handler = quit_handler; }
+	std::function<void ()> get_quit_handler() { return m_quit_handler; }
+
 private:
 	void read();
 	void write();
 
 	std::function<void (std::string&)> m_read_handler;
+	std::function<void ()> m_quit_handler;
 
 	tcp::socket m_socket;
 	constexpr static int k_max_length = 1024;

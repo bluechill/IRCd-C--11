@@ -8,6 +8,8 @@
 
 #include "IRC_Server.h"
 
+using namespace std;
+
 IRC_Server::IRC_Server(boost::asio::io_service& io_service, short port)
 : m_acceptor_v4(io_service),
 m_acceptor_v6(io_service),
@@ -19,7 +21,7 @@ m_port(port)
 
 void IRC_Server::start()
 {
-	error_code ec;
+	boost::system::error_code ec;
 
 	boost::asio::ip::v6_only v6_only;
 
@@ -53,9 +55,28 @@ IRC_Server::~IRC_Server()
 	m_acceptor_v6.close();
 }
 
-void IRC_Server::read_handler(std::shared_ptr<IRC_Client> client, std::string &message)
+void IRC_Server::set_client_handlers(shared_ptr<IRC_Client> client)
 {
+	client->set_read_handler([this, client](string &message)
+							 {
+								 client_read_handler(client, message);
+							 });
+
+	client->set_quit_handler([this, client]()
+							 {
+								 client_quit_handler(client);
+							 });
+}
+
+void IRC_Server::client_read_handler(shared_ptr<IRC_Client> client, string &message)
+{
+	cout << "Recieved message: '" << message << "'" << endl;
 	client->write(message);
+}
+
+void IRC_Server::client_quit_handler(shared_ptr<IRC_Client> client)
+{
+	cout << "Client exited: '" << client->m_socket.remote_endpoint().address().to_string() << "'" << endl;
 }
 
 void IRC_Server::accept()
@@ -70,14 +91,13 @@ void IRC_Server::accept()
 							   {
 								   if (!ec)
 								   {
-									   auto client = std::make_shared<IRC_Client>(std::move(m_socket), m_io_service, self, nullptr);
+									   auto client = make_shared<IRC_Client>(move(m_socket), m_io_service, self);
 
 									   m_clients.insert(client);
 
-									   client->set_read_handler([this, client](std::string &message)
-																{
-																	read_handler(client, message);
-																});
+									   set_client_handlers(client);
+
+									   cout << "Client connecting from: '" << client->m_socket.remote_endpoint().address().to_string() << "'" << endl;
 									   client->start();
 								   }
 
@@ -97,14 +117,13 @@ void IRC_Server::accept_v4()
 							   {
 								   if (!ec)
 								   {
-									   auto client = std::make_shared<IRC_Client>(std::move(m_socket_v4), m_io_service, self, nullptr);
+									   auto client = make_shared<IRC_Client>(move(m_socket_v4), m_io_service, self);
 
 									   m_clients.insert(client);
 
-									   client->set_read_handler([this, client](std::string &message)
-																{
-																	read_handler(client, message);
-																});
+									   set_client_handlers(client);
+
+									   cout << "Client connecting from: '" << client->m_socket.remote_endpoint().address().to_string() << "'" << endl;
 									   client->start();
 								   }
 

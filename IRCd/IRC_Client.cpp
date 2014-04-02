@@ -8,16 +8,17 @@
 
 #include "IRC_Client.h"
 
-IRC_Client::IRC_Client(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd, std::function<void (std::string&)> read_handler)
-: m_socket(std::move(socket)),
+using namespace std;
+
+IRC_Client::IRC_Client(tcp::socket socket, boost::asio::io_service& io_service_, shared_ptr<IRC_Server> ircd)
+: m_socket(move(socket)),
 m_ptr_ircd(ircd),
 m_socket_closed(false),
 m_io_service(io_service_),
 m_strand(io_service_),
-m_read_handler(read_handler)
-{
-	std::cout << "Client connecting from: '" << m_socket.remote_endpoint().address().to_string() << "'" << std::endl;
-}
+m_read_handler(nullptr),
+m_quit_handler(nullptr)
+{}
 
 IRC_Client::~IRC_Client()
 {
@@ -26,8 +27,20 @@ IRC_Client::~IRC_Client()
 
 void IRC_Client::start()
 {
+	if (!m_read_handler)
+	{
+		cerr << "Error: Trying to start a client with no read handler!" << endl;
+		return;
+	}
+
+	if (!m_quit_handler)
+	{
+		cerr << "Error: Trying to start a cleitn with no quit handler!" << endl;
+		return;
+	}
+
 	auto self(shared_from_this());
-	m_thread_read = std::thread([this, self] ()
+	m_thread_read = thread([this, self] ()
 							 {
 								 while (!m_socket_closed && m_socket.is_open())
 								 {
@@ -36,7 +49,7 @@ void IRC_Client::start()
 							 });
 }
 
-void IRC_Client::write(const std::string &text)
+void IRC_Client::write(const string &text)
 {
 	if (m_socket_closed || !m_socket.is_open())
 		return;
@@ -64,12 +77,13 @@ void IRC_Client::read()
 	}
 	catch (boost::system::system_error &e)
 	{
-		std::cerr << e.what() << std::endl;
+		cerr << "Error: " << e.what() << endl;
 
-		if (e.code() == boost::asio::error::eof)
+		if (e.code() == boost::asio::error::eof ||
+			e.code() == boost::asio::error::connection_reset)
 		{
 			m_socket_closed = true;
-			std::cout << "Client exited: '" << m_socket.remote_endpoint().address().to_string() << "'" << std::endl;
+			m_quit_handler();
 		}
 
 		return;
@@ -77,7 +91,7 @@ void IRC_Client::read()
 
 	if (m_read_handler)
 	{
-		std::string data(m_data);
+		string data(m_data);
 		m_read_handler(data);
 	}
 }
@@ -85,15 +99,15 @@ void IRC_Client::read()
 void IRC_Client::write()
 {
 	auto self(shared_from_this());
-	const std::string& message = m_strandProtect_outbox[0];
+	const string& message = m_strandProtect_outbox[0];
 	boost::asio::async_write(m_socket, boost::asio::buffer(message),
-							 m_strand.wrap([this, self] (boost::system::error_code ec, std::size_t /*length*/)
+							 m_strand.wrap([this, self] (boost::system::error_code ec, size_t /*length*/)
 										  {
 											  m_strandProtect_outbox.pop_front();
 
 											  if (ec)
 											  {
-												  std::cerr << "Error: " << ec.message() << std::endl;
+												  cerr << "Error: " << ec.message() << endl;
 												  return;
 											  }
 
