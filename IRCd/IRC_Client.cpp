@@ -66,6 +66,13 @@ void IRC_Client::write(const string &text)
 				 });
 }
 
+void IRC_Client::disconnect()
+{
+	m_socket.shutdown(tcp::socket::shutdown_both);
+	m_socket.close();
+	m_socket_closed = true;
+}
+
 void IRC_Client::read()
 {
 	if (m_socket_closed || !m_socket.is_open())
@@ -98,6 +105,9 @@ void IRC_Client::read()
 
 void IRC_Client::write()
 {
+	if (m_socket_closed || !m_socket.is_open())
+		return;
+
 	auto self(shared_from_this());
 	const string& message = m_strandProtect_outbox[0];
 	boost::asio::async_write(m_socket, boost::asio::buffer(message),

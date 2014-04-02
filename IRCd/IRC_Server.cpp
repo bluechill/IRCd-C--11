@@ -71,7 +71,11 @@ void IRC_Server::set_client_handlers(shared_ptr<IRC_Client> client)
 void IRC_Server::client_read_handler(shared_ptr<IRC_Client> client, string &message)
 {
 	cout << "Recieved message: '" << message << "'" << endl;
-	client->write(message);
+
+	if (message == "quit\n" || message == "quit\r\n" || message == "quit")
+		client->disconnect();
+	else
+		client->write(message);
 }
 
 void IRC_Server::client_quit_handler(shared_ptr<IRC_Client> client)
