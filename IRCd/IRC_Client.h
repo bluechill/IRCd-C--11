@@ -24,110 +24,37 @@ using boost::asio::ip::tcp;
 class IRC_Client
 : public std::enable_shared_from_this<IRC_Client>
 {
+	friend class IRC_Server;
+
 public:
-	IRC_Client(tcp::socket socket, IRC_Server* ircd, boost::asio::io_service& io_service_)
-    : socket_(std::move(socket)),
-	ircd_ptr(ircd),
-	socketClosed(false),
-	io_service(io_service_),
-	strand_(io_service_)
-	{
-		std::cout << "Client connecting from: '" << socket_.remote_endpoint().address().to_string() << "'" << std::endl;
-	}
+	IRC_Client(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd, std::function<void (std::string&)> read_handler);
+	~IRC_Client();
 
-	~IRC_Client()
-	{
-		readThread.join();
-	}
-
-	void start()
-	{
-		auto self(shared_from_this());
-		readThread = std::thread([this, self] ()
-								 {
-									 while (!socketClosed && socket_.is_open())
-									 {
-										 do_read();
-									 }
-								 });
-	}
-
-	void do_read()
-	{
-		if (socketClosed || !socket_.is_open())
-			return;
-
-		try
-		{
-			socket_.read_some(boost::asio::buffer(data_, max_length));
-		}
-		catch (boost::system::system_error &e)
-		{
-			std::cerr << e.what() << std::endl;
-
-			if (e.code() == boost::asio::error::eof)
-			{
-				socketClosed = true;
-				std::cout << "Client exited: '" << socket_.remote_endpoint().address().to_string() << "'" << std::endl;
-			}
-
-			return;
-		}
-
-		do_write(std::string(data_));
-	}
-
-	void do_write(const std::string& text)
-	{
-		if (socketClosed || !socket_.is_open())
-			return;
-
-		auto self(shared_from_this());
-		strand_.post([this, self, text]()
-					 {
-						 outbox.push_back(text);
-
-						 if (outbox.size() > 1)
-							 return;
-						 
-						 this->write();
-					 });
-	}
+	void write(const std::string& text);
 
 private:
-	void write()
-	{
-		auto self(shared_from_this());
-		const std::string& message = outbox[0];
-		boost::asio::async_write(socket_, boost::asio::buffer(message),
-								 strand_.wrap([this, self] (boost::system::error_code ec, std::size_t /*length*/)
-								 {
-									 outbox.pop_front();
+	void start();
+	
+	void set_read_handler(std::function<void (std::string&)> read_handler) { m_read_handler = read_handler; }
+	std::function<void (std::string&)> get_read_handler() { return m_read_handler; }
 
-									 if (ec)
-									 {
-										 std::cerr << "Error: " << ec.message() << std::endl;
-										 return;
-									 }
+private:
+	void read();
+	void write();
 
-									 if ( !outbox.empty() ) {
-										 this->write();
-									 }
-								 }));
-	}
+	std::function<void (std::string&)> m_read_handler;
 
-	tcp::socket socket_;
-	enum { max_length = 1024 };
-	char data_[max_length];
+	tcp::socket m_socket;
+	constexpr static int k_max_length = 1024;
+	char m_data[k_max_length];
+	bool m_socket_closed;
 
-	IRC_Server* ircd_ptr;
-	std::thread readThread;
+	std::shared_ptr<IRC_Server> m_ptr_ircd;
+	std::thread m_thread_read;
 
-	boost::asio::io_service& io_service;
-	boost::asio::io_service::strand strand_;
-	std::deque<std::string> outbox;
-
-	bool socketClosed;
+	boost::asio::io_service& m_io_service;
+	boost::asio::io_service::strand m_strand;
+	std::deque<std::string> m_strandProtect_outbox;
 };
 
 #endif /* defined(__IRCd__TCP_Connection__) */

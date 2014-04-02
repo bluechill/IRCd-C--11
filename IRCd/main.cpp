@@ -22,7 +22,8 @@ int main(int argc, const char * argv[])
 	{
 		boost::asio::io_service io_service;
 
-		IRC_Server s(io_service, 31337);
+		auto s = std::make_shared<IRC_Server>(io_service, 31337);
+		s->start();
 
 		io_service.run();
 	}
