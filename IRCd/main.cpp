@@ -12,7 +12,7 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
 
-#include "TCP_Server.h"
+#include "IRC_Server.h"
 
 using boost::asio::ip::tcp;
 
