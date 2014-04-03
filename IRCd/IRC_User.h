@@ -24,6 +24,16 @@ public:
 
 	void reset_ping(); // Resets PING timer and sends a new PING message
 
+	void set_nickname(std::string nickname) { m_IRC_nickname = nickname; }
+	std::string get_nickname() { return m_IRC_nickname; }
+
+	void set_realname(std::string realname) { m_IRC_realname = realname; }
+	std::string get_realname() { return m_IRC_realname; }
+
+	void set_hostname(std::string hostname) { m_IRC_hostname = hostname; }
+	std::string get_hostname() { return m_IRC_hostname; }
+	std::string get_real_hostname() { return m_IRC_real_hostname; };
+
 private:
 	// Handler Stuff
 	virtual void set_read_handler(std::function<void (std::string&)> read_handler) { m_read_handler = read_handler; }
@@ -39,6 +49,7 @@ private:
 	std::string m_IRC_nickname;
 	std::string m_IRC_realname;
 	std::string m_IRC_hostname;
+	std::string m_IRC_real_hostname;
 
 	constexpr static int k_ping_timeout = 10;
 	constexpr static int k_ping_send_time = 10;

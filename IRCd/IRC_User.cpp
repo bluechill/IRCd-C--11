@@ -29,6 +29,13 @@ m_ping_contents("test")
 									   {
 										   read_handler(message);
 									   });
+
+	boost::asio::ip::tcp::resolver resolver(io_service_);
+	boost::asio::ip::tcp::endpoint endpoint(m_socket.remote_endpoint().address(), 0);
+	auto it = resolver.resolve(endpoint);
+
+	m_IRC_real_hostname = it->host_name();
+	m_IRC_hostname = it->host_name();
 }
 
 IRC_User::~IRC_User()

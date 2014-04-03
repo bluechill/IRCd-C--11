@@ -101,7 +101,7 @@ void IRC_Server::accept()
 
 									   set_client_handlers(client);
 
-									   cout << "Client connecting from: '" << client->m_socket.remote_endpoint().address().to_string() << "'" << endl;
+									   cout << "Client connecting from: '" << client->m_socket.remote_endpoint().address().to_string() << "' / '" << client->get_hostname() << "'" << endl;
 									   client->start();
 								   }
 
