@@ -15,7 +15,7 @@
 #include <boost/asio.hpp>
 #include <set>
 
-#include "IRC_Client.h"
+#include "IRC_User.h"
 
 using boost::asio::ip::tcp;
 using boost::system::error_code;
@@ -28,6 +28,8 @@ public:
 	~IRC_Server();
 
 	void start();
+
+	std::string get_server_hostname();
 
 private:
 	void set_client_handlers(std::shared_ptr<IRC_Client> client);
@@ -44,7 +46,7 @@ private:
 	tcp::socket m_socket_v4;
 	const short m_port;
 
-	std::set<std::shared_ptr<IRC_Client>> m_clients;
+	std::set<std::shared_ptr<IRC_User>> m_clients;
 	boost::asio::io_service& m_io_service;
 };
 

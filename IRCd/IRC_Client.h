@@ -28,21 +28,20 @@ class IRC_Client
 
 public:
 	IRC_Client(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd);
-	~IRC_Client();
+	virtual ~IRC_Client();
 
 	void write(const std::string& text);
 	void disconnect();
 
-private:
+protected:
 	void start();
 	
-	void set_read_handler(std::function<void (std::string&)> read_handler) { m_read_handler = read_handler; }
-	std::function<void (std::string&)> get_read_handler() { return m_read_handler; }
+	virtual void set_read_handler(std::function<void (std::string&)> read_handler) { m_read_handler = read_handler; }
+	virtual std::function<void (std::string&)> get_read_handler() { return m_read_handler; }
 
-	void set_quit_handler(std::function<void ()> quit_handler) { m_quit_handler = quit_handler; }
-	std::function<void ()> get_quit_handler() { return m_quit_handler; }
+	virtual void set_quit_handler(std::function<void ()> quit_handler) { m_quit_handler = quit_handler; }
+	virtual std::function<void ()> get_quit_handler() { return m_quit_handler; }
 
-private:
 	void read();
 	void write();
 

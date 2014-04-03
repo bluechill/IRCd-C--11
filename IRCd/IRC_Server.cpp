@@ -95,7 +95,7 @@ void IRC_Server::accept()
 							   {
 								   if (!ec)
 								   {
-									   auto client = make_shared<IRC_Client>(move(m_socket), m_io_service, self);
+									   auto client = make_shared<IRC_User>(move(m_socket), m_io_service, self);
 
 									   m_clients.insert(client);
 
@@ -121,7 +121,7 @@ void IRC_Server::accept_v4()
 							   {
 								   if (!ec)
 								   {
-									   auto client = make_shared<IRC_Client>(move(m_socket_v4), m_io_service, self);
+									   auto client = make_shared<IRC_User>(move(m_socket_v4), m_io_service, self);
 
 									   m_clients.insert(client);
 
@@ -133,4 +133,9 @@ void IRC_Server::accept_v4()
 
 								   accept_v4();
 							   });
+}
+
+std::string IRC_Server::get_server_hostname()
+{
+	return boost::asio::ip::host_name();
 }

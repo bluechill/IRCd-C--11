@@ -15,6 +15,7 @@
 		4D82AD7618E09CA00001F47D /* IRCd.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4D82AD7518E09CA00001F47D /* IRCd.1 */; };
 		4DA1D15B18E9DE0F00C1B5AF /* libboost_date_time-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA1D15918E9DE0F00C1B5AF /* libboost_date_time-mt.dylib */; };
 		4DA1D15C18E9DE0F00C1B5AF /* libboost_serialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA1D15A18E9DE0F00C1B5AF /* libboost_serialization.dylib */; };
+		4DD3F86418ECB67000CAB7E8 /* IRC_User.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */; };
 		4DF7E44318EA3E1600D1C536 /* IRC_Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7E44118EA3E1600D1C536 /* IRC_Client.cpp */; };
 		4DF7E44618EA3E7A00D1C536 /* IRC_Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7E44418EA3E7A00D1C536 /* IRC_Server.cpp */; };
 /* End PBXBuildFile section */
@@ -272,6 +273,8 @@
 		4D82AD7518E09CA00001F47D /* IRCd.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = IRCd.1; sourceTree = "<group>"; };
 		4DA1D15918E9DE0F00C1B5AF /* libboost_date_time-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_date_time-mt.dylib"; path = "../../../../../../../usr/local/lib/libboost_date_time-mt.dylib"; sourceTree = "<group>"; };
 		4DA1D15A18E9DE0F00C1B5AF /* libboost_serialization.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_serialization.dylib; path = ../../../../../../../usr/local/lib/libboost_serialization.dylib; sourceTree = "<group>"; };
+		4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_User.cpp; sourceTree = "<group>"; };
+		4DD3F86318ECB67000CAB7E8 /* IRC_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_User.h; sourceTree = "<group>"; };
 		4DF7E44118EA3E1600D1C536 /* IRC_Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Client.cpp; sourceTree = "<group>"; };
 		4DF7E44218EA3E1600D1C536 /* IRC_Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Client.h; sourceTree = "<group>"; };
 		4DF7E44418EA3E7A00D1C536 /* IRC_Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Server.cpp; sourceTree = "<group>"; };
@@ -895,6 +898,8 @@
 				4DF7E44218EA3E1600D1C536 /* IRC_Client.h */,
 				4DF7E44418EA3E7A00D1C536 /* IRC_Server.cpp */,
 				4DF7E44518EA3E7A00D1C536 /* IRC_Server.h */,
+				4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */,
+				4DD3F86318ECB67000CAB7E8 /* IRC_User.h */,
 			);
 			name = IRC;
 			sourceTree = "<group>";
@@ -951,6 +956,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D82AD7418E09CA00001F47D /* main.cpp in Sources */,
+				4DD3F86418ECB67000CAB7E8 /* IRC_User.cpp in Sources */,
 				4DF7E44618EA3E7A00D1C536 /* IRC_Server.cpp in Sources */,
 				4DF7E44318EA3E1600D1C536 /* IRC_Client.cpp in Sources */,
 			);

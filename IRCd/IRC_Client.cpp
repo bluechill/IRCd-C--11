@@ -68,6 +68,10 @@ void IRC_Client::write(const string &text)
 
 void IRC_Client::disconnect()
 {
+	cout << "Force Disconnect" << endl;
+
+	m_quit_handler();
+
 	m_socket.shutdown(tcp::socket::shutdown_both);
 	m_socket.close();
 	m_socket_closed = true;
@@ -90,7 +94,9 @@ void IRC_Client::read()
 			e.code() == boost::asio::error::connection_reset)
 		{
 			m_socket_closed = true;
+
 			m_quit_handler();
+			m_socket.close();
 		}
 
 		return;
