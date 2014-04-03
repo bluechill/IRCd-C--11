@@ -27,9 +27,9 @@ public:
 	{
 		cout << "Quit Initialization" << endl;
 
-		m_ircd->add_client_recieve_handler([](shared_ptr<IRC_User> user, const IRC_Message &message)
+		m_ircd->add_client_recieve_handler([](shared_ptr<IRC_User> user, const string &message)
 										   {
-											   if (boost::iequals(message.get_command(), "quit"))
+											   if (boost::iequals(message, "quit"))
 												   user->disconnect();
 										   });
 	}

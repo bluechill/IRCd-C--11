@@ -18,18 +18,18 @@
 
 using namespace std;
 
-class Plugin_Quit : public IRC_Plugin
+class Plugin_Nick : public IRC_Plugin
 {
 public:
-	Plugin_Quit(shared_ptr<IRC_Server> ircd, void* handle)
+	Plugin_Nick(shared_ptr<IRC_Server> ircd, void* handle)
 	: IRC_Plugin(handle),
 	m_ircd(ircd)
 	{
-		cout << "Quit Initialization" << endl;
+		cout << "Nick Initialization" << endl;
 
-		m_ircd->add_client_recieve_handler([](shared_ptr<IRC_User> user, const IRC_Message &message)
+		m_ircd->add_client_recieve_handler([](shared_ptr<IRC_User> user, const string &message)
 										   {
-											   if (boost::iequals(message.get_command(), "quit"))
+											   if (boost::iequals(message, "nick"))
 												   user->disconnect();
 										   });
 	}
@@ -40,7 +40,7 @@ private:
 
 extern "C" IRC_Plugin* Create_Plugin(shared_ptr<IRC_Server> ircd, void* handle)
 {
-	return new Plugin_Quit(ircd, handle);
+	return new Plugin_Nick(ircd, handle);
 }
 
 #endif /* defined(__IRCd__Plugin_Nick__) */

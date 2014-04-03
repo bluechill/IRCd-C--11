@@ -24,7 +24,7 @@ BASEDIR := $(shell pwd)
 
 PLUGINS=Plugin_Quit.plugin
 
-IRCD_LIBRARY_OBJECTS=IRC_Client.o IRC_Server.o IRC_User.o IRC_Channel.o IRC_Plugin.o IRC_Plugin_Loader.o
+IRCD_LIBRARY_OBJECTS=IRC_Client.o IRC_Server.o IRC_User.o IRC_Channel.o IRC_Plugin.o IRC_Plugin_Loader.o IRC_Message.o
 
 all: libIRCd.a $(PLUGINS)
 

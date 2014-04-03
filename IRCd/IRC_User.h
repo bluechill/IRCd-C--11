@@ -56,8 +56,8 @@ private:
 	std::string m_IRC_hostname;
 	std::string m_IRC_real_hostname;
 
-	constexpr static int k_ping_timeout = 10;
-	constexpr static int k_ping_send_time = 10;
+	constexpr static int k_ping_timeout = 60;
+	constexpr static int k_ping_send_time = 30;
 	void ping_timeout(const boost::system::error_code &ec);
 
 	// Internal User Stuff

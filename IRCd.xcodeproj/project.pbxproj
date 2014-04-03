@@ -19,6 +19,7 @@
 		4DD090D518ED002500802293 /* IRC_Plugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD090D318ED002500802293 /* IRC_Plugin.cpp */; };
 		4DD090D818ED07DF00802293 /* IRC_Plugin_Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD090D618ED07DF00802293 /* IRC_Plugin_Loader.cpp */; };
 		4DD2EAAB18EDA2C100D20EF4 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2EAAA18EDA2C100D20EF4 /* Makefile */; };
+		4DD2EAB618EDD0D600D20EF4 /* IRC_Message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2EAB418EDD0D600D20EF4 /* IRC_Message.cpp */; };
 		4DD3F86418ECB67000CAB7E8 /* IRC_User.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */; };
 		4DF7E44318EA3E1600D1C536 /* IRC_Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7E44118EA3E1600D1C536 /* IRC_Client.cpp */; };
 		4DF7E44618EA3E7A00D1C536 /* IRC_Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7E44418EA3E7A00D1C536 /* IRC_Server.cpp */; };
@@ -302,6 +303,10 @@
 		4DD090D618ED07DF00802293 /* IRC_Plugin_Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Plugin_Loader.cpp; sourceTree = "<group>"; };
 		4DD090D718ED07DF00802293 /* IRC_Plugin_Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Plugin_Loader.h; sourceTree = "<group>"; };
 		4DD2EAAA18EDA2C100D20EF4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		4DD2EAB218EDC8BE00D20EF4 /* Plugin_Nick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_Nick.cpp; sourceTree = "<group>"; };
+		4DD2EAB318EDC8BE00D20EF4 /* Plugin_User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_User.cpp; sourceTree = "<group>"; };
+		4DD2EAB418EDD0D600D20EF4 /* IRC_Message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Message.cpp; sourceTree = "<group>"; };
+		4DD2EAB518EDD0D600D20EF4 /* IRC_Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Message.h; sourceTree = "<group>"; };
 		4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_User.cpp; sourceTree = "<group>"; };
 		4DD3F86318ECB67000CAB7E8 /* IRC_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_User.h; sourceTree = "<group>"; };
 		4DF7E44118EA3E1600D1C536 /* IRC_Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Client.cpp; sourceTree = "<group>"; };
@@ -925,6 +930,8 @@
 			isa = PBXGroup;
 			children = (
 				4DD090CD18ED000800802293 /* Plugin_Quit.cpp */,
+				4DD2EAB218EDC8BE00D20EF4 /* Plugin_Nick.cpp */,
+				4DD2EAB318EDC8BE00D20EF4 /* Plugin_User.cpp */,
 				4DD2EAAA18EDA2C100D20EF4 /* Makefile */,
 			);
 			name = Plugins;
@@ -945,6 +952,8 @@
 				4DD090D418ED002500802293 /* IRC_Plugin.h */,
 				4DD090D618ED07DF00802293 /* IRC_Plugin_Loader.cpp */,
 				4DD090D718ED07DF00802293 /* IRC_Plugin_Loader.h */,
+				4DD2EAB418EDD0D600D20EF4 /* IRC_Message.cpp */,
+				4DD2EAB518EDD0D600D20EF4 /* IRC_Message.h */,
 			);
 			name = IRC;
 			sourceTree = "<group>";
@@ -1028,6 +1037,7 @@
 				4DD090D818ED07DF00802293 /* IRC_Plugin_Loader.cpp in Sources */,
 				4DD2EAAB18EDA2C100D20EF4 /* Makefile in Sources */,
 				4DF7E44318EA3E1600D1C536 /* IRC_Client.cpp in Sources */,
+				4DD2EAB618EDD0D600D20EF4 /* IRC_Message.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

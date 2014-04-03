@@ -17,6 +17,7 @@
 
 #include "IRC_User.h"
 #include "IRC_Plugin_Loader.h"
+#include "IRC_Message.h"
 
 using boost::asio::ip::tcp;
 using boost::system::error_code;
@@ -37,7 +38,7 @@ public:
 
 	std::string get_server_hostname();
 
-	void add_client_recieve_handler(std::function<void (std::shared_ptr<IRC_User>, const std::string &message)> handler);
+	void add_client_recieve_handler(std::function<void (std::shared_ptr<IRC_User>, const IRC_Message &message)> handler);
 	void add_client_connect_handler(std::function<void (std::shared_ptr<IRC_User>)> handler);
 	void add_client_quit_handler(std::function<void (std::shared_ptr<IRC_User>)> handler);
 
@@ -61,7 +62,7 @@ private:
 
 	bool m_started;
 
-	std::vector<std::function<void (std::shared_ptr<IRC_User>, const std::string &message)>> m_recieve_handlers;
+	std::vector<std::function<void (std::shared_ptr<IRC_User>, const IRC_Message &message)>> m_recieve_handlers;
 	std::vector<std::function<void (std::shared_ptr<IRC_User>)>> m_connect_handlers;
 	std::vector<std::function<void (std::shared_ptr<IRC_User>)>> m_quit_handlers;
 

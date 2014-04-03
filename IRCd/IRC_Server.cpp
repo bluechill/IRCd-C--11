@@ -8,6 +8,10 @@
 
 #include "IRC_Server.h"
 
+#include <regex>
+#include <iterator>
+#include <algorithm>
+
 using namespace std;
 
 IRC_Server::IRC_Server(boost::asio::io_service& io_service, short port)
@@ -65,7 +69,7 @@ IRC_Server::~IRC_Server()
 	m_acceptor_v6.close();
 }
 
-void IRC_Server::add_client_recieve_handler(std::function<void (std::shared_ptr<IRC_User>, const std::string &message)> handler)
+void IRC_Server::add_client_recieve_handler(std::function<void (std::shared_ptr<IRC_User>, const IRC_Message &message)> handler)
 {
 	m_recieve_handlers.push_back(handler);
 }
@@ -95,16 +99,12 @@ void IRC_Server::set_client_handlers(shared_ptr<IRC_User> client)
 
 void IRC_Server::client_read_handler(shared_ptr<IRC_User> client, string &message)
 {
-	while (message.back() == '\n' || message.back() == '\r')
-		message.erase(message.end()-1);
+	cout << "Recieved RAW message: '" << message << "'" << endl;
 
-	if (message.size() == 0)
-		return;
-
-	cout << "Recieved message: '" << message << "'" << endl;
+	IRC_Message parsed_message(message);
 
 	for (auto handler : m_recieve_handlers)
-		handler(client, message);
+		handler(client, parsed_message);
 }
 
 void IRC_Server::client_quit_handler(shared_ptr<IRC_User> client)
