@@ -26,6 +26,11 @@ class IRC_Client
 {
 	friend class IRC_Server;
 
+	IRC_Client(const IRC_Client &);
+	IRC_Client& operator=(const IRC_Client& other);
+	IRC_Client(IRC_Client&& other);
+	IRC_Client& operator=(const IRC_Client&& other);
+
 public:
 	IRC_Client(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd);
 	virtual ~IRC_Client();

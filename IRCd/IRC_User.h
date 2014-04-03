@@ -18,6 +18,11 @@ class IRC_User : public IRC_Client
 {
 	friend class IRC_Server;
 
+	IRC_User(const IRC_User &);
+	IRC_User(IRC_User &&);
+	IRC_User& operator=(const IRC_User& other);
+	IRC_User& operator=(const IRC_User&& other);
+
 public:
 	IRC_User(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd);
 	~IRC_User();

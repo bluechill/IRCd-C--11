@@ -15,10 +15,31 @@
 		4D82AD7618E09CA00001F47D /* IRCd.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4D82AD7518E09CA00001F47D /* IRCd.1 */; };
 		4DA1D15B18E9DE0F00C1B5AF /* libboost_date_time-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA1D15918E9DE0F00C1B5AF /* libboost_date_time-mt.dylib */; };
 		4DA1D15C18E9DE0F00C1B5AF /* libboost_serialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA1D15A18E9DE0F00C1B5AF /* libboost_serialization.dylib */; };
+		4DD090D218ED001D00802293 /* IRC_Channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD090D018ED001D00802293 /* IRC_Channel.cpp */; };
+		4DD090D518ED002500802293 /* IRC_Plugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD090D318ED002500802293 /* IRC_Plugin.cpp */; };
+		4DD090D818ED07DF00802293 /* IRC_Plugin_Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD090D618ED07DF00802293 /* IRC_Plugin_Loader.cpp */; };
+		4DD2EAAB18EDA2C100D20EF4 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2EAAA18EDA2C100D20EF4 /* Makefile */; };
 		4DD3F86418ECB67000CAB7E8 /* IRC_User.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */; };
 		4DF7E44318EA3E1600D1C536 /* IRC_Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7E44118EA3E1600D1C536 /* IRC_Client.cpp */; };
 		4DF7E44618EA3E7A00D1C536 /* IRC_Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7E44418EA3E7A00D1C536 /* IRC_Server.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4DD2EAAE18EDAC8F00D20EF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D82AD6818E09CA00001F47D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D82AD6F18E09CA00001F47D;
+			remoteInfo = IRCd;
+		};
+		4DD2EAB018EDB7A900D20EF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D82AD6818E09CA00001F47D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DD2EAA618EDA2B200D20EF4;
+			remoteInfo = Plugins;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4D82AD6E18E09CA00001F47D /* CopyFiles */ = {
@@ -273,6 +294,14 @@
 		4D82AD7518E09CA00001F47D /* IRCd.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = IRCd.1; sourceTree = "<group>"; };
 		4DA1D15918E9DE0F00C1B5AF /* libboost_date_time-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_date_time-mt.dylib"; path = "../../../../../../../usr/local/lib/libboost_date_time-mt.dylib"; sourceTree = "<group>"; };
 		4DA1D15A18E9DE0F00C1B5AF /* libboost_serialization.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_serialization.dylib; path = ../../../../../../../usr/local/lib/libboost_serialization.dylib; sourceTree = "<group>"; };
+		4DD090CD18ED000800802293 /* Plugin_Quit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_Quit.cpp; sourceTree = "<group>"; };
+		4DD090D018ED001D00802293 /* IRC_Channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Channel.cpp; sourceTree = "<group>"; };
+		4DD090D118ED001D00802293 /* IRC_Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Channel.h; sourceTree = "<group>"; };
+		4DD090D318ED002500802293 /* IRC_Plugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Plugin.cpp; sourceTree = "<group>"; };
+		4DD090D418ED002500802293 /* IRC_Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Plugin.h; sourceTree = "<group>"; };
+		4DD090D618ED07DF00802293 /* IRC_Plugin_Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Plugin_Loader.cpp; sourceTree = "<group>"; };
+		4DD090D718ED07DF00802293 /* IRC_Plugin_Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Plugin_Loader.h; sourceTree = "<group>"; };
+		4DD2EAAA18EDA2C100D20EF4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_User.cpp; sourceTree = "<group>"; };
 		4DD3F86318ECB67000CAB7E8 /* IRC_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_User.h; sourceTree = "<group>"; };
 		4DF7E44118EA3E1600D1C536 /* IRC_Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Client.cpp; sourceTree = "<group>"; };
@@ -884,11 +913,21 @@
 		4D82AD7218E09CA00001F47D /* IRCd */ = {
 			isa = PBXGroup;
 			children = (
+				4DD090CF18ED001000802293 /* Plugins */,
 				4DF7E44018EA3DFF00D1C536 /* IRC */,
 				4D82AD7318E09CA00001F47D /* main.cpp */,
 				4D82AD7518E09CA00001F47D /* IRCd.1 */,
 			);
 			path = IRCd;
+			sourceTree = "<group>";
+		};
+		4DD090CF18ED001000802293 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				4DD090CD18ED000800802293 /* Plugin_Quit.cpp */,
+				4DD2EAAA18EDA2C100D20EF4 /* Makefile */,
+			);
+			name = Plugins;
 			sourceTree = "<group>";
 		};
 		4DF7E44018EA3DFF00D1C536 /* IRC */ = {
@@ -900,11 +939,35 @@
 				4DF7E44518EA3E7A00D1C536 /* IRC_Server.h */,
 				4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */,
 				4DD3F86318ECB67000CAB7E8 /* IRC_User.h */,
+				4DD090D018ED001D00802293 /* IRC_Channel.cpp */,
+				4DD090D118ED001D00802293 /* IRC_Channel.h */,
+				4DD090D318ED002500802293 /* IRC_Plugin.cpp */,
+				4DD090D418ED002500802293 /* IRC_Plugin.h */,
+				4DD090D618ED07DF00802293 /* IRC_Plugin_Loader.cpp */,
+				4DD090D718ED07DF00802293 /* IRC_Plugin_Loader.h */,
 			);
 			name = IRC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		4DD2EAA618EDA2B200D20EF4 /* Plugins */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 4DD2EAA918EDA2B300D20EF4 /* Build configuration list for PBXLegacyTarget "Plugins" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/local/opt/make/bin/make;
+			buildWorkingDirectory = /Users/bluechill/Developer/PersonalProjects/IRCd/IRCd;
+			dependencies = (
+				4DD2EAAF18EDAC8F00D20EF4 /* PBXTargetDependency */,
+			);
+			name = Plugins;
+			passBuildSettingsInEnvironment = 1;
+			productName = Plugins;
+		};
+/* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
 		4D82AD6F18E09CA00001F47D /* IRCd */ = {
@@ -918,6 +981,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4DD2EAB118EDB7A900D20EF4 /* PBXTargetDependency */,
 			);
 			name = IRCd;
 			productName = IRCd;
@@ -946,6 +1010,7 @@
 			projectRoot = "";
 			targets = (
 				4D82AD6F18E09CA00001F47D /* IRCd */,
+				4DD2EAA618EDA2B200D20EF4 /* Plugins */,
 			);
 		};
 /* End PBXProject section */
@@ -957,12 +1022,29 @@
 			files = (
 				4D82AD7418E09CA00001F47D /* main.cpp in Sources */,
 				4DD3F86418ECB67000CAB7E8 /* IRC_User.cpp in Sources */,
+				4DD090D518ED002500802293 /* IRC_Plugin.cpp in Sources */,
+				4DD090D218ED001D00802293 /* IRC_Channel.cpp in Sources */,
 				4DF7E44618EA3E7A00D1C536 /* IRC_Server.cpp in Sources */,
+				4DD090D818ED07DF00802293 /* IRC_Plugin_Loader.cpp in Sources */,
+				4DD2EAAB18EDA2C100D20EF4 /* Makefile in Sources */,
 				4DF7E44318EA3E1600D1C536 /* IRC_Client.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4DD2EAAF18EDAC8F00D20EF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D82AD6F18E09CA00001F47D /* IRCd */;
+			targetProxy = 4DD2EAAE18EDAC8F00D20EF4 /* PBXContainerItemProxy */;
+		};
+		4DD2EAB118EDB7A900D20EF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DD2EAA618EDA2B200D20EF4 /* Plugins */;
+			targetProxy = 4DD2EAB018EDB7A900D20EF4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4D82AD7718E09CA00001F47D /* Debug */ = {
@@ -1058,6 +1140,12 @@
 		4D82AD7A18E09CA00001F47D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_STATIC_ANALYZER_MODE = deep;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/usr/lib",
@@ -1065,18 +1153,51 @@
 					/usr/local/Cellar/boost/1.55.0_1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = Debug;
 		};
 		4D82AD7B18E09CA00001F47D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_STATIC_ANALYZER_MODE = deep;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/usr/lib",
 					/usr/local/Cellar/openssl/1.0.1f/lib,
 					/usr/local/Cellar/boost/1.55.0_1/lib,
 				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+			};
+			name = Release;
+		};
+		4DD2EAA718EDA2B300D20EF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4DD2EAA818EDA2B300D20EF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1101,6 +1222,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		4DD2EAA918EDA2B300D20EF4 /* Build configuration list for PBXLegacyTarget "Plugins" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DD2EAA718EDA2B300D20EF4 /* Debug */,
+				4DD2EAA818EDA2B300D20EF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

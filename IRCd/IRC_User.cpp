@@ -15,12 +15,12 @@ using namespace std;
 
 IRC_User::IRC_User(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd)
 : IRC_Client(move(socket), io_service_, ircd),
-m_io_service(io_service_),
-m_strand(io_service_),
+m_ping_contents("test"),
 m_timer_ping_timeout(io_service_),
 m_timer_ping_send(io_service_),
-m_ircd(ircd),
-m_ping_contents("test")
+m_io_service(io_service_),
+m_strand(io_service_),
+m_ircd(ircd)
 {
 	m_timer_ping_timeout.expires_from_now(boost::posix_time::seconds(k_ping_timeout));
 	m_timer_ping_timeout.async_wait([this](const boost::system::error_code &ec) { ping_timeout(ec);	});
@@ -45,7 +45,7 @@ IRC_User::~IRC_User()
 
 void IRC_User::ping_timeout(const boost::system::error_code &ec)
 {
-	if (ec)
+	if (ec || m_socket_closed || !m_socket.is_open())
 		return;
 
 	// Ping Timeout
@@ -77,7 +77,7 @@ void IRC_User::reset_ping()
 	m_timer_ping_send.expires_from_now(boost::posix_time::seconds(k_ping_send_time));
 	m_timer_ping_send.async_wait([this](const boost::system::error_code &ec)
 								{
-									if (ec)
+									if (ec || m_socket_closed || !m_socket.is_open())
 										return;
 
 									write("PING :" + m_ping_contents + "\r\n");
@@ -93,4 +93,6 @@ void IRC_User::read_handler(std::string &message)
 		if (ping_contents == m_ping_contents)
 			reset_ping();
 	}
+	else
+		m_read_handler(message);
 }

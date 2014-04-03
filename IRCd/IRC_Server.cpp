@@ -15,12 +15,16 @@ IRC_Server::IRC_Server(boost::asio::io_service& io_service, short port)
 m_acceptor_v6(io_service),
 m_socket(io_service),
 m_socket_v4(io_service),
+m_port(port),
 m_io_service(io_service),
-m_port(port)
+m_started(false)
 {}
 
 void IRC_Server::start()
 {
+	if (m_started)
+		return;
+	
 	boost::system::error_code ec;
 
 	boost::asio::ip::v6_only v6_only;
@@ -47,6 +51,12 @@ void IRC_Server::start()
 	}
 
 	accept();
+
+	// Load Plugins
+	unique_ptr<IRC_Plugin_Loader> loader(new IRC_Plugin_Loader(shared_from_this()));
+	m_plugin_loader.swap(loader);
+
+	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_Quit.plugin"));
 }
 
 IRC_Server::~IRC_Server()
@@ -55,7 +65,22 @@ IRC_Server::~IRC_Server()
 	m_acceptor_v6.close();
 }
 
-void IRC_Server::set_client_handlers(shared_ptr<IRC_Client> client)
+void IRC_Server::add_client_recieve_handler(std::function<void (std::shared_ptr<IRC_User>, const std::string &message)> handler)
+{
+	m_recieve_handlers.push_back(handler);
+}
+
+void IRC_Server::add_client_connect_handler(std::function<void (std::shared_ptr<IRC_User>)> handler)
+{
+	m_connect_handlers.push_back(handler);
+}
+
+void IRC_Server::add_client_quit_handler(std::function<void (std::shared_ptr<IRC_User>)> handler)
+{
+	m_quit_handlers.push_back(handler);
+}
+
+void IRC_Server::set_client_handlers(shared_ptr<IRC_User> client)
 {
 	client->set_read_handler([this, client](string &message)
 							 {
@@ -68,19 +93,26 @@ void IRC_Server::set_client_handlers(shared_ptr<IRC_Client> client)
 							 });
 }
 
-void IRC_Server::client_read_handler(shared_ptr<IRC_Client> client, string &message)
+void IRC_Server::client_read_handler(shared_ptr<IRC_User> client, string &message)
 {
+	while (message.back() == '\n' || message.back() == '\r')
+		message.erase(message.end()-1);
+
+	if (message.size() == 0)
+		return;
+
 	cout << "Recieved message: '" << message << "'" << endl;
 
-	if (message == "quit\n" || message == "quit\r\n" || message == "quit")
-		client->disconnect();
-	else
-		client->write(message);
+	for (auto handler : m_recieve_handlers)
+		handler(client, message);
 }
 
-void IRC_Server::client_quit_handler(shared_ptr<IRC_Client> client)
+void IRC_Server::client_quit_handler(shared_ptr<IRC_User> client)
 {
 	cout << "Client exited: '" << client->m_socket.remote_endpoint().address().to_string() << "'" << endl;
+
+	for (auto handler : m_quit_handlers)
+		handler(client);
 }
 
 void IRC_Server::accept()
@@ -103,6 +135,9 @@ void IRC_Server::accept()
 
 									   cout << "Client connecting from: '" << client->m_socket.remote_endpoint().address().to_string() << "' / '" << client->get_hostname() << "'" << endl;
 									   client->start();
+
+									   for (auto handler : m_connect_handlers)
+										   handler(client);
 								   }
 
 								   accept();
@@ -129,6 +164,9 @@ void IRC_Server::accept_v4()
 
 									   cout << "Client connecting from: '" << client->m_socket.remote_endpoint().address().to_string() << "'" << endl;
 									   client->start();
+
+									   for (auto handler : m_connect_handlers)
+										   handler(client);
 								   }
 
 								   accept_v4();

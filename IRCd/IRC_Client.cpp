@@ -11,13 +11,13 @@
 using namespace std;
 
 IRC_Client::IRC_Client(tcp::socket socket, boost::asio::io_service& io_service_, shared_ptr<IRC_Server> ircd)
-: m_socket(move(socket)),
-m_ptr_ircd(ircd),
+: m_read_handler(nullptr),
+m_quit_handler(nullptr),
+m_socket(move(socket)),
 m_socket_closed(false),
+m_ptr_ircd(ircd),
 m_io_service(io_service_),
-m_strand(io_service_),
-m_read_handler(nullptr),
-m_quit_handler(nullptr)
+m_strand(io_service_)
 {}
 
 IRC_Client::~IRC_Client()
@@ -41,12 +41,12 @@ void IRC_Client::start()
 
 	auto self(shared_from_this());
 	m_thread_read = thread([this, self] ()
-							 {
-								 while (!m_socket_closed && m_socket.is_open())
-								 {
-									 read();
-								 }
-							 });
+						   {
+							   while (!m_socket_closed && m_socket.is_open())
+							   {
+								   read();
+							   }
+						   });
 }
 
 void IRC_Client::write(const string &text)
@@ -105,7 +105,9 @@ void IRC_Client::read()
 	if (m_read_handler)
 	{
 		string data(m_data);
-		m_read_handler(data);
+
+		if (data.size() != 0)
+			m_read_handler(data);
 	}
 }
 

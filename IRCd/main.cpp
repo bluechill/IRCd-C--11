@@ -16,7 +16,7 @@
 
 using boost::asio::ip::tcp;
 
-int main(int argc, const char * argv[])
+int main()
 {
 	try
 	{
