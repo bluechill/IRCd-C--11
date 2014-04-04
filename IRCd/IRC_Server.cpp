@@ -8,6 +8,8 @@
 
 #include "IRC_Server.h"
 
+#include <boost/filesystem.hpp>
+
 #include <regex>
 #include <iterator>
 #include <algorithm>
@@ -60,10 +62,22 @@ void IRC_Server::start()
 	unique_ptr<IRC_Plugin_Loader> loader(new IRC_Plugin_Loader(shared_from_this()));
 	m_plugin_loader.swap(loader);
 
-	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_Quit.plugin"));
-	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_Nick.plugin"));
-	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_User.plugin"));
-	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_MOTD.plugin"));
+	boost::filesystem::path current_directory("./");
+	boost::filesystem::path plugins_directory("./plugins/");
+
+	std::vector<boost::filesystem::path> files;
+
+	if (boost::filesystem::exists(current_directory) && boost::filesystem::is_directory(current_directory))
+		copy(boost::filesystem::directory_iterator(current_directory), boost::filesystem::directory_iterator(), std::back_inserter(files));
+
+	if (boost::filesystem::exists(plugins_directory) && boost::filesystem::is_directory(plugins_directory))
+		copy(boost::filesystem::directory_iterator(current_directory), boost::filesystem::directory_iterator(), std::back_inserter(files));
+
+	for (auto entry : files)
+	{
+		if (entry.extension() == ".plugin")
+			m_plugins.push_back(m_plugin_loader->load_plugin(entry.string()));
+	}
 }
 
 IRC_Server::~IRC_Server()

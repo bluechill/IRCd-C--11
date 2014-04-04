@@ -16,7 +16,7 @@ AR=ar
 
 CFLAGS=-g -fPIC -Wall -I/usr/local/include/ -std=c++11 -stdlib=libc++
 CXXFLAGS=$(CFLAGS)
-LDFLAGS=$(LDFLAGS_ADD) -L/usr/local/lib -L/usr/local/opt/openssl/lib -lcrypto -lssl -lboost_thread-mt -lboost_system-mt -lboost_date_time-mt -lboost_serialization -L./ -lIRCd
+LDFLAGS=$(LDFLAGS_ADD) -L/usr/local/lib -L/usr/local/opt/openssl/lib -lcrypto -lssl -lboost_thread-mt -lboost_system-mt -lboost_date_time-mt -lboost_serialization -lboost_filesystem-mt -L./ -lIRCd
 
 ARFLAGS=-cr
 
