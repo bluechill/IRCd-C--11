@@ -78,7 +78,7 @@
 		4D82AD7518E09CA00001F47D /* IRCd.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = IRCd.1; sourceTree = "<group>"; };
 		4DA1D15918E9DE0F00C1B5AF /* libboost_date_time-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_date_time-mt.dylib"; path = "../../../../../../../usr/local/lib/libboost_date_time-mt.dylib"; sourceTree = "<group>"; };
 		4DA1D15A18E9DE0F00C1B5AF /* libboost_serialization.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_serialization.dylib; path = ../../../../../../../usr/local/lib/libboost_serialization.dylib; sourceTree = "<group>"; };
-		4DD090CD18ED000800802293 /* Plugin_Quit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_Quit.cpp; sourceTree = "<group>"; };
+		4DD090CD18ED000800802293 /* Quit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quit.cpp; sourceTree = "<group>"; };
 		4DD090D018ED001D00802293 /* IRC_Channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Channel.cpp; sourceTree = "<group>"; };
 		4DD090D118ED001D00802293 /* IRC_Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Channel.h; sourceTree = "<group>"; };
 		4DD090D318ED002500802293 /* IRC_Plugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Plugin.cpp; sourceTree = "<group>"; };
@@ -4973,12 +4973,16 @@
 		4DD214C818EE405C00D20EF4 /* xpressive_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_fwd.hpp; sourceTree = "<group>"; };
 		4DD214C918EE405C00D20EF4 /* xpressive_static.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_static.hpp; sourceTree = "<group>"; };
 		4DD214CA18EE405C00D20EF4 /* xpressive_typeof.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_typeof.hpp; sourceTree = "<group>"; };
+		4DD214CC18EE574800D20EF4 /* IRC_Mode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Mode.h; sourceTree = "<group>"; };
+		4DD214CE18EE608500D20EF4 /* Privmsg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Privmsg.cpp; sourceTree = "<group>"; };
+		4DD214CF18EE608500D20EF4 /* Join.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Join.cpp; sourceTree = "<group>"; };
+		4DD214D218EE642E00D20EF4 /* Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		4DD2EAAA18EDA2C100D20EF4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		4DD2EAB218EDC8BE00D20EF4 /* Plugin_Nick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_Nick.cpp; sourceTree = "<group>"; };
-		4DD2EAB318EDC8BE00D20EF4 /* Plugin_User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_User.cpp; sourceTree = "<group>"; };
+		4DD2EAB218EDC8BE00D20EF4 /* Nick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Nick.cpp; sourceTree = "<group>"; };
+		4DD2EAB318EDC8BE00D20EF4 /* User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = User.cpp; sourceTree = "<group>"; };
 		4DD2EAB418EDD0D600D20EF4 /* IRC_Message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Message.cpp; sourceTree = "<group>"; };
 		4DD2EAB518EDD0D600D20EF4 /* IRC_Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Message.h; sourceTree = "<group>"; };
-		4DD2EAB718EE16C800D20EF4 /* Plugin_MOTD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_MOTD.cpp; sourceTree = "<group>"; };
+		4DD2EAB718EE16C800D20EF4 /* MOTD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOTD.cpp; sourceTree = "<group>"; };
 		4DD2EAB818EE3FB300D20EF4 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../../../usr/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
 		4DD2EABC18EE404800D20EF4 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		4DD2EABD18EE404800D20EF4 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
@@ -10116,10 +10120,12 @@
 		4DD090CF18ED001000802293 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				4DD090CD18ED000800802293 /* Plugin_Quit.cpp */,
-				4DD2EAB218EDC8BE00D20EF4 /* Plugin_Nick.cpp */,
-				4DD2EAB318EDC8BE00D20EF4 /* Plugin_User.cpp */,
-				4DD2EAB718EE16C800D20EF4 /* Plugin_MOTD.cpp */,
+				4DD090CD18ED000800802293 /* Quit.cpp */,
+				4DD2EAB218EDC8BE00D20EF4 /* Nick.cpp */,
+				4DD2EAB318EDC8BE00D20EF4 /* User.cpp */,
+				4DD2EAB718EE16C800D20EF4 /* MOTD.cpp */,
+				4DD214CE18EE608500D20EF4 /* Privmsg.cpp */,
+				4DD214CF18EE608500D20EF4 /* Join.cpp */,
 				4DD2EAAA18EDA2C100D20EF4 /* Makefile */,
 			);
 			name = Plugins;
@@ -26847,6 +26853,8 @@
 				4DD090D718ED07DF00802293 /* IRC_Plugin_Loader.h */,
 				4DD2EAB418EDD0D600D20EF4 /* IRC_Message.cpp */,
 				4DD2EAB518EDD0D600D20EF4 /* IRC_Message.h */,
+				4DD214CC18EE574800D20EF4 /* IRC_Mode.h */,
+				4DD214D218EE642E00D20EF4 /* Utility.h */,
 			);
 			name = IRC;
 			sourceTree = "<group>";

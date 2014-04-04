@@ -44,6 +44,8 @@ public:
 
 	bool is_registered();
 
+	const std::string construct_user_id() const { return m_IRC_nickname + "!" + m_IRC_username + "@" + m_IRC_hostname; }
+
 private:
 	// Handler Stuff
 	virtual void set_read_handler(std::function<void (std::string&)> read_handler) { m_read_handler = read_handler; }

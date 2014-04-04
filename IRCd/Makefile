@@ -22,7 +22,7 @@ ARFLAGS=-cr
 
 BASEDIR := $(shell pwd)
 
-PLUGINS=Plugin_Quit.plugin Plugin_Nick.plugin Plugin_User.plugin Plugin_MOTD.plugin
+PLUGINS=Quit.plugin Nick.plugin User.plugin MOTD.plugin Privmsg.plugin Join.plugin
 
 IRCD_LIBRARY_OBJECTS=IRC_Client.o IRC_Server.o IRC_User.o IRC_Channel.o IRC_Plugin.o IRC_Plugin_Loader.o IRC_Message.o
 
@@ -41,6 +41,4 @@ libIRCd.a: $(IRCD_LIBRARY_OBJECTS) Makefile
 	@$(CXX) $(CXXFLAGS) $(LDFLAGS) -flat_namespace -dynamiclib -o $@ $<
 
 clean:
-	@rm -f $(PLUGINS)
-	@rm -f $(PLUGINS:.plugin=.o)
-	@rm -f libIRCd.a
+	@rm -rf *.a *.plugin *.o *.dSYM

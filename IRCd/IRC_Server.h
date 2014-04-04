@@ -16,6 +16,7 @@
 #include <set>
 
 #include "IRC_User.h"
+#include "IRC_Channel.h"
 #include "IRC_Plugin_Loader.h"
 #include "IRC_Message.h"
 
@@ -36,12 +37,15 @@ public:
 
 	void start();
 
-	std::string get_server_hostname();
+	std::string get_server_hostname() const;
 
 	void add_client_recieve_handler(std::function<void (std::shared_ptr<IRC_User>, const IRC_Message &message)> handler);
 	void add_client_connect_handler(std::function<void (std::shared_ptr<IRC_User>)> handler);
 	void add_client_quit_handler(std::function<void (std::shared_ptr<IRC_User>)> handler);
 	void add_client_registered_handler(std::function<void (std::shared_ptr<IRC_User>)> handler);
+
+	void add_channel(std::shared_ptr<IRC_Channel> channel) { m_channels.insert(channel); }
+	const std::set<std::shared_ptr<IRC_Channel>>& get_channels() const { return m_channels; }
 
 private:
 	void set_client_handlers(std::shared_ptr<IRC_User> client);
@@ -59,6 +63,7 @@ private:
 	const short m_port;
 
 	std::set<std::shared_ptr<IRC_User>> m_clients;
+	std::set<std::shared_ptr<IRC_Channel>> m_channels;
 	boost::asio::io_service& m_io_service;
 
 	bool m_started;

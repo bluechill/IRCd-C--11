@@ -9,10 +9,25 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Plugins.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>4D82AD6F18E09CA00001F47D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4DD090DC18ED254F00802293</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4DD2EAA618EDA2B200D20EF4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -50,6 +50,8 @@ public:
 													   user->reset_ping(true);
 
 												   user->set_nickname(nick);
+
+												   // TODO: Write acknowledgement of nick changing
 											   }
 										   });
 	}

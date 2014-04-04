@@ -30,7 +30,11 @@ public:
 		m_ircd->add_client_recieve_handler([](shared_ptr<IRC_User> user, const IRC_Message &message)
 										   {
 											   if (boost::iequals(message.get_command(), "quit"))
+											   {
 												   user->disconnect();
+
+												   // TODO: Write acknowledgement of disconnect to other users
+											   }
 										   });
 	}
 

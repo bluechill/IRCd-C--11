@@ -203,7 +203,7 @@ void IRC_Server::accept_v4()
 							   });
 }
 
-std::string IRC_Server::get_server_hostname()
+std::string IRC_Server::get_server_hostname() const
 {
 	return boost::asio::ip::host_name();
 }
