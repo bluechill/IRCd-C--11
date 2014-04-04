@@ -54,10 +54,14 @@ void IRC_Client::write(const string &text)
 	if (m_socket_closed || !m_socket.is_open())
 		return;
 
+	string sent_text = text;
+	if (*(text.end()-1) != '\n' && *(text.end()-2) != '\r')
+		sent_text += "\r\n";
+
 	auto self(shared_from_this());
-	m_strand.post([this, self, text]()
+	m_strand.post([this, self, sent_text]()
 				 {
-					 m_strandProtect_outbox.push_back(text);
+					 m_strandProtect_outbox.push_back(sent_text);
 
 					 if (m_strandProtect_outbox.size() > 1)
 						 return;

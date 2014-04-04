@@ -15,7 +15,7 @@ using namespace std;
 
 IRC_User::IRC_User(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd)
 : IRC_Client(move(socket), io_service_, ircd),
-m_ping_contents("test"),
+m_ping_contents(""),
 m_timer_ping_timeout(io_service_),
 m_timer_ping_send(io_service_),
 m_io_service(io_service_),
@@ -53,7 +53,7 @@ void IRC_User::ping_timeout(const boost::system::error_code &ec)
 	disconnect();
 }
 
-void IRC_User::reset_ping()
+void IRC_User::reset_ping(bool send_now)
 {
 	if (m_ping_contents.empty())
 	{
@@ -74,14 +74,24 @@ void IRC_User::reset_ping()
 	m_timer_ping_timeout.expires_from_now(boost::posix_time::seconds(k_ping_timeout + k_ping_send_time));
 	m_timer_ping_timeout.async_wait([this](const boost::system::error_code &ec) { ping_timeout(ec);	});
 
-	m_timer_ping_send.expires_from_now(boost::posix_time::seconds(k_ping_send_time));
-	m_timer_ping_send.async_wait([this](const boost::system::error_code &ec)
+	if (!send_now)
+	{
+		m_timer_ping_send.expires_from_now(boost::posix_time::seconds(k_ping_send_time));
+		m_timer_ping_send.async_wait([this](const boost::system::error_code &ec)
 								{
 									if (ec || m_socket_closed || !m_socket.is_open())
 										return;
 
 									write("PING :" + m_ping_contents + "\r\n");
 								});
+	}
+	else
+	{
+		m_timer_ping_send.cancel();
+
+		if (!m_socket_closed && m_socket.is_open())
+			write("PING :" + m_ping_contents + "\r\n");
+	}
 }
 
 void IRC_User::read_handler(std::string &message)
@@ -95,4 +105,12 @@ void IRC_User::read_handler(std::string &message)
 	}
 	else
 		m_read_handler(message);
+}
+
+bool IRC_User::is_registered()
+{
+	return !m_IRC_username.empty() &&
+		   !m_IRC_nickname.empty() &&
+		   !m_IRC_hostname.empty() &&
+		   !m_IRC_realname.empty();
 }

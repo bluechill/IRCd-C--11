@@ -61,6 +61,9 @@ void IRC_Server::start()
 	m_plugin_loader.swap(loader);
 
 	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_Quit.plugin"));
+	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_Nick.plugin"));
+	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_User.plugin"));
+	m_plugins.push_back(m_plugin_loader->load_plugin("Plugin_MOTD.plugin"));
 }
 
 IRC_Server::~IRC_Server()
@@ -84,6 +87,11 @@ void IRC_Server::add_client_quit_handler(std::function<void (std::shared_ptr<IRC
 	m_quit_handlers.push_back(handler);
 }
 
+void IRC_Server::add_client_registered_handler(std::function<void (std::shared_ptr<IRC_User>)> handler)
+{
+	m_registered_handlers.push_back(handler);
+}
+
 void IRC_Server::set_client_handlers(shared_ptr<IRC_User> client)
 {
 	client->set_read_handler([this, client](string &message)
@@ -103,8 +111,16 @@ void IRC_Server::client_read_handler(shared_ptr<IRC_User> client, string &messag
 
 	IRC_Message parsed_message(message);
 
+	bool registered = client->is_registered();
+
 	for (auto handler : m_recieve_handlers)
 		handler(client, parsed_message);
+
+	if (!registered && client->is_registered())
+	{
+		for (auto handler : m_registered_handlers)
+			handler(client);
+	}
 }
 
 void IRC_Server::client_quit_handler(shared_ptr<IRC_User> client)

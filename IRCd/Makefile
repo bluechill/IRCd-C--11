@@ -22,7 +22,7 @@ ARFLAGS=-cr
 
 BASEDIR := $(shell pwd)
 
-PLUGINS=Plugin_Quit.plugin
+PLUGINS=Plugin_Quit.plugin Plugin_Nick.plugin Plugin_User.plugin Plugin_MOTD.plugin
 
 IRCD_LIBRARY_OBJECTS=IRC_Client.o IRC_Server.o IRC_User.o IRC_Channel.o IRC_Plugin.o IRC_Plugin_Loader.o IRC_Message.o
 

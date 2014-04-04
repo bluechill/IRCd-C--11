@@ -15,6 +15,8 @@
 #include "IRC_Server.h"
 
 #include <memory>
+#include <regex>
+#include <iterator>
 
 using namespace std;
 
@@ -27,10 +29,28 @@ public:
 	{
 		cout << "Nick Initialization" << endl;
 
-		m_ircd->add_client_recieve_handler([](shared_ptr<IRC_User> user, const string &message)
+		m_ircd->add_client_recieve_handler([](shared_ptr<IRC_User> user, const IRC_Message &message)
 										   {
-											   if (boost::iequals(message, "nick"))
-												   user->disconnect();
+											   if (boost::iequals(message.get_command(), "nick"))
+											   {
+												   if (message.get_options().size() != 1)
+													   return;
+
+												   string nick = message.get_options()[0];
+
+												   if (nick.size() < 3 || nick.size() > 16)
+													   return;
+
+												   regex valid("[a-z][a-z0-9.-]{2,15}", std::regex_constants::icase);
+
+												   if (!regex_match(nick, valid))
+													   return;
+
+												   if (user->get_nickname().size() == 0)
+													   user->reset_ping(true);
+
+												   user->set_nickname(nick);
+											   }
 										   });
 	}
 

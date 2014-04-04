@@ -41,6 +41,7 @@ public:
 	void add_client_recieve_handler(std::function<void (std::shared_ptr<IRC_User>, const IRC_Message &message)> handler);
 	void add_client_connect_handler(std::function<void (std::shared_ptr<IRC_User>)> handler);
 	void add_client_quit_handler(std::function<void (std::shared_ptr<IRC_User>)> handler);
+	void add_client_registered_handler(std::function<void (std::shared_ptr<IRC_User>)> handler);
 
 private:
 	void set_client_handlers(std::shared_ptr<IRC_User> client);
@@ -65,6 +66,7 @@ private:
 	std::vector<std::function<void (std::shared_ptr<IRC_User>, const IRC_Message &message)>> m_recieve_handlers;
 	std::vector<std::function<void (std::shared_ptr<IRC_User>)>> m_connect_handlers;
 	std::vector<std::function<void (std::shared_ptr<IRC_User>)>> m_quit_handlers;
+	std::vector<std::function<void (std::shared_ptr<IRC_User>)>> m_registered_handlers;
 
 	std::vector<std::unique_ptr<IRC_Plugin>> m_plugins;
 	std::unique_ptr<IRC_Plugin_Loader> m_plugin_loader;

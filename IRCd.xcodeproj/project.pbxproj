@@ -307,6 +307,7 @@
 		4DD2EAB318EDC8BE00D20EF4 /* Plugin_User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_User.cpp; sourceTree = "<group>"; };
 		4DD2EAB418EDD0D600D20EF4 /* IRC_Message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Message.cpp; sourceTree = "<group>"; };
 		4DD2EAB518EDD0D600D20EF4 /* IRC_Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_Message.h; sourceTree = "<group>"; };
+		4DD2EAB718EE16C800D20EF4 /* Plugin_MOTD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin_MOTD.cpp; sourceTree = "<group>"; };
 		4DD3F86218ECB67000CAB7E8 /* IRC_User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_User.cpp; sourceTree = "<group>"; };
 		4DD3F86318ECB67000CAB7E8 /* IRC_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRC_User.h; sourceTree = "<group>"; };
 		4DF7E44118EA3E1600D1C536 /* IRC_Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IRC_Client.cpp; sourceTree = "<group>"; };
@@ -932,6 +933,7 @@
 				4DD090CD18ED000800802293 /* Plugin_Quit.cpp */,
 				4DD2EAB218EDC8BE00D20EF4 /* Plugin_Nick.cpp */,
 				4DD2EAB318EDC8BE00D20EF4 /* Plugin_User.cpp */,
+				4DD2EAB718EE16C800D20EF4 /* Plugin_MOTD.cpp */,
 				4DD2EAAA18EDA2C100D20EF4 /* Makefile */,
 			);
 			name = Plugins;

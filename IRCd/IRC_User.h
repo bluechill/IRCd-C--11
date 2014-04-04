@@ -27,10 +27,13 @@ public:
 	IRC_User(tcp::socket socket, boost::asio::io_service& io_service_, std::shared_ptr<IRC_Server> ircd);
 	~IRC_User();
 
-	void reset_ping(); // Resets PING timer and sends a new PING message
+	void reset_ping(bool send_now = false); // Resets PING timer and sends a new PING message
 
 	void set_nickname(std::string nickname) { m_IRC_nickname = nickname; }
 	std::string get_nickname() { return m_IRC_nickname; }
+
+	void set_username(std::string username) { m_IRC_username = username; }
+	std::string get_username() { return m_IRC_username; }
 
 	void set_realname(std::string realname) { m_IRC_realname = realname; }
 	std::string get_realname() { return m_IRC_realname; }
@@ -38,6 +41,8 @@ public:
 	void set_hostname(std::string hostname) { m_IRC_hostname = hostname; }
 	std::string get_hostname() { return m_IRC_hostname; }
 	std::string get_real_hostname() { return m_IRC_real_hostname; };
+
+	bool is_registered();
 
 private:
 	// Handler Stuff
@@ -52,6 +57,7 @@ private:
 	// IRC Stuff
 
 	std::string m_IRC_nickname;
+	std::string m_IRC_username;
 	std::string m_IRC_realname;
 	std::string m_IRC_hostname;
 	std::string m_IRC_real_hostname;
